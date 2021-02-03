@@ -66,7 +66,7 @@ namespace RKIWebService.Entities
 			}
 		}
 		[JsonPropertyName("last_update")]
-		public string? LastUpdateString
+		public string LastUpdateString
 		{
 			get => lastUpdateString; set
 			{
