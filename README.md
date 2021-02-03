@@ -1,11 +1,7 @@
-# Covid19 RKI Dashboard
-A very simple Covid-19 Dashboard for German Cities using data from the Robert Koch Institut 
+# RKI Web Service for Covid-19 Data
+A WebService for in C# .net Standard 2.0 to receivce covid-19/Corona data for Germany
 
 # Demo
 
-Demo at: https://covid19.reble.eu  
-You can set a direct link to any city you want by entering it after the URL  
-Example: https://covid19.reble.eu/Hamburg
-
-![Screenshot](https://github.com/maxreb/Covid19Dashboard/blob/main/doc/screenshot.png?raw=true)
+Demo at: https://github.com/maxreb/Covid19Dashboard
 
