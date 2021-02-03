@@ -29,8 +29,8 @@ namespace RKIWebService.Services.Arcgis
 				return null;
 			foreach (var feature in res.Features)
 			{
-				feature.Attributes.DeathRate = feature.Attributes.TotalDeath / (double)feature.Attributes.TotalStatePopulation;
-				feature.Attributes.CasesPerPopulation = feature.Attributes.Cases / (double)feature.Attributes.TotalStatePopulation;
+				feature.Attributes.DeathRate = 100.0 * feature.Attributes.TotalDeath / feature.Attributes.Cases;
+				feature.Attributes.CasesPerPopulation = 100.0 * feature.Attributes.Cases / feature.Attributes.TotalStatePopulation;
 			}
 			return res;
 		}
