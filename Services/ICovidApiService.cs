@@ -21,5 +21,6 @@ namespace RKIWebService.Services
 		/// On Failure: false and data.Count == 0</returns>
 		bool TryGetCityData(string cityKey, DateTime from, out IEnumerable<ICovid19Data> data, DateTime? to = null);
 		bool TryGetStateData(string cityKey, DateTime from, out IEnumerable<ICovid19Data> data, DateTime? to = null);
+		bool TryGetCountryData(DateTime from, out IEnumerable<ICovid19Data> data, DateTime? to = null);
 	}
 }

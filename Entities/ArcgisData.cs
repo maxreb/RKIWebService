@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text.Json.Serialization;
 #nullable disable
 
@@ -71,7 +72,8 @@ namespace RKIWebService.Entities
 			get => lastUpdateString; set
 			{
 				lastUpdateString = value;
-				LastUpdate = DateTime.ParseExact(value, @"dd.MM.yyyy, HH:mm U\hr", null);
+				if (DateTime.TryParseExact(value, @"dd.MM.yyyy, HH:mm U\hr", null, DateTimeStyles.None, out DateTime result))
+					LastUpdate = result;
 			}
 		}
 		[JsonIgnore]

@@ -131,7 +131,7 @@ namespace RKIWebService.Services.Arcgis
 			try
 			{
 				var json = await dataset.QueryJson();
-				if (json is null)
+				if (string.IsNullOrEmpty(json))
 				{
 					_logger.LogError("QueryJson failed, json is null");
 					return false;
@@ -190,6 +190,11 @@ namespace RKIWebService.Services.Arcgis
 
 		public bool TryGetStateData(string cityKey, DateTime from, out IEnumerable<ICovid19Data> data, DateTime? to = null)
 		=> _datasetState.TryGetFromCityKey(cityKey, from, out data, to);
+
+		public bool TryGetCountryData(DateTime @from, out IEnumerable<ICovid19Data> data, DateTime? to = null)
+		{
+			throw new NotImplementedException();
+		}
 
 		protected override async Task ExecuteAsync(CancellationToken stoppingToken)
 		{
