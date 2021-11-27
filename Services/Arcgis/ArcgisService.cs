@@ -1,4 +1,4 @@
-﻿using RKIWebService.Entities;
+﻿using Reble.RKIWebService.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
@@ -13,7 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 
-namespace RKIWebService.Services.Arcgis
+namespace Reble.RKIWebService.Services.Arcgis
 {
 	public class ArcgisServiceOptions
 	{

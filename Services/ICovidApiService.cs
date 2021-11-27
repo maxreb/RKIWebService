@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Hosting;
-using RKIWebService.Entities;
+using Reble.RKIWebService.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace RKIWebService.Services
+namespace Reble.RKIWebService.Services
 {
 	public interface ICovidApiService : IHostedService
 	{

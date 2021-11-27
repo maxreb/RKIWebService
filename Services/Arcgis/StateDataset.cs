@@ -1,13 +1,14 @@
 ﻿using Microsoft.Extensions.Logging;
-using RKIWebService.Entities;
+using Reble.RKIWebService.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Reble.RKIWebService.Services;
 
-namespace RKIWebService.Services.Arcgis
+namespace Reble.RKIWebService.Services.Arcgis
 {
 	public class StateDataset : Dataset
 	{
@@ -40,6 +41,7 @@ namespace RKIWebService.Services.Arcgis
 			var stateKey = CitiesRepository.GetStateFromCityKey(cityKey);
 			return QueryJson(stateKey.ToString());
 		}
-		internal override Func<Feature, bool> LinqKeySearchMethod(string key) => (t) => t.Attributes.StateKey == CitiesRepository.GetStateFromCityKey(key);
+		internal override Func<Feature, bool> LinqKeySearchMethod(string key) => 
+			t => t.Attributes.StateKey == CitiesRepository.GetStateFromCityKey(key);
 	}
 }

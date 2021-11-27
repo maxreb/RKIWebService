@@ -1,6 +1,7 @@
 ﻿using System;
+using Reble.RKIWebService.Services;
 
-namespace RKIWebService.Entities
+namespace Reble.RKIWebService.Entities
 {
 	public interface ICovid19Data
 	{
@@ -12,5 +13,6 @@ namespace RKIWebService.Entities
 		int TotalDeath { get; }
 		double DeathRate { get; }
 		double CasesPerPopulation { get; }
+		// StateIds GetStateId() => CitiesRepository.GetStateFromCityKey()
 	}
 }

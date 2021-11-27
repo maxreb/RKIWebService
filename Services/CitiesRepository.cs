@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Reble.RKIWebService.Entities;
 
-namespace RKIWebService.Services
+// ReSharper disable StringLiteralTypo
+
+namespace Reble.RKIWebService.Services
 {
 	public static class CitiesRepository
 	{
 		//data from: © GeoBasis-DE / BKG (2020)
-		public static int GetStateFromCityKey(string cityKey)
-			=> int.Parse(cityKey.Substring(0, 2));
-		public static int GetStateFromCityName(string cityName)
+		public static StateIds GetStateFromCityKey(string cityKey)
+			=> (StateIds)int.Parse(cityKey.Substring(0, 2));
+		public static StateIds GetStateFromCityName(string cityName)
 			=> GetStateFromCityKey(CitiesToKeys[cityName]);
 		public static readonly IReadOnlyDictionary<string, string> CitiesToKeys = new ReadOnlyDictionary<string, string>(
 			new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
@@ -24,6 +27,8 @@ namespace RKIWebService.Services
 				["Dortmund"] = "05913",
 				["Essen"] = "05113",
 				["Bremen"] = "04011",
+				["Hannover"] = "03241",
+				["Leipzig"] = "14713",
 				["Berlin Reinickendorf"] = "11012",
 				["Berlin Charlottenburg-Wilmersdorf"] = "11004",
 				["Berlin Treptow-Köpenick"] = "11009",
@@ -35,8 +40,6 @@ namespace RKIWebService.Services
 				["Berlin Steglitz-Zehlendorf"] = "11006",
 				["Berlin Friedrichshain-Kreuzberg"] = "11002",
 				["Berlin Tempelhof-Schöneberg"] = "11007",
-				["Hannover"] = "03241",
-				["Leipzig"] = "14713",
 				["Dresden"] = "14612",
 				["Nürnberg"] = "09564",
 				["Duisburg"] = "05112",

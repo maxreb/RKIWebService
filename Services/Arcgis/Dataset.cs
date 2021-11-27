@@ -1,4 +1,4 @@
-﻿using RKIWebService.Entities;
+﻿using Reble.RKIWebService.Entities;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace RKIWebService.Services.Arcgis
+namespace Reble.RKIWebService.Services.Arcgis
 {
 	public abstract class Dataset
 	{

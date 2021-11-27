@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Text.Json.Serialization;
 #nullable disable
 
-namespace RKIWebService.Entities
+namespace Reble.RKIWebService.Entities
 {
 	public class UniqueIdField
 	{
@@ -107,7 +107,7 @@ namespace RKIWebService.Entities
 		[JsonPropertyName("LAN_ew_EWZ")]
 		public long TotalStatePopulation { get; set; }
 		[JsonPropertyName("OBJECTID_1")]
-		public int StateKey { get; set; }
+		public StateIds StateKey { get; set; }
 	}
 
 
