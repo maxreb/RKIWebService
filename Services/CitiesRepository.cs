@@ -12,8 +12,10 @@ namespace Reble.RKIWebService.Services
 		//data from: © GeoBasis-DE / BKG (2020)
 		public static StateIds GetStateFromCityKey(string cityKey)
 			=> (StateIds)int.Parse(cityKey.Substring(0, 2));
+
 		public static StateIds GetStateFromCityName(string cityName)
 			=> GetStateFromCityKey(CitiesToKeys[cityName]);
+
 		public static readonly IReadOnlyDictionary<string, string> CitiesToKeys = new ReadOnlyDictionary<string, string>(
 			new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
 			{

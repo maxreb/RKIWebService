@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text.Json.Serialization;
+
 #nullable disable
 
 namespace Reble.RKIWebService.Entities
 {
 	public class UniqueIdField
 	{
-		[JsonPropertyName("name")]
-		public string Name { get; set; }
+		[JsonPropertyName("name")] public string Name { get; set; }
 
 		[JsonPropertyName("isSystemMaintained")]
 		public bool IsSystemMaintained { get; set; }
@@ -17,35 +17,26 @@ namespace Reble.RKIWebService.Entities
 
 	public class SpatialReference
 	{
-		[JsonPropertyName("wkid")]
-		public int Wkid { get; set; }
+		[JsonPropertyName("wkid")] public int Wkid { get; set; }
 
-		[JsonPropertyName("latestWkid")]
-		public int LatestWkid { get; set; }
+		[JsonPropertyName("latestWkid")] public int LatestWkid { get; set; }
 	}
 
 	public class Field
 	{
-		[JsonPropertyName("name")]
-		public string Name { get; set; }
+		[JsonPropertyName("name")] public string Name { get; set; }
 
-		[JsonPropertyName("type")]
-		public string Type { get; set; }
+		[JsonPropertyName("type")] public string Type { get; set; }
 
-		[JsonPropertyName("alias")]
-		public string Alias { get; set; }
+		[JsonPropertyName("alias")] public string Alias { get; set; }
 
-		[JsonPropertyName("sqlType")]
-		public string SqlType { get; set; }
+		[JsonPropertyName("sqlType")] public string SqlType { get; set; }
 
-		[JsonPropertyName("domain")]
-		public object Domain { get; set; }
+		[JsonPropertyName("domain")] public object Domain { get; set; }
 
-		[JsonPropertyName("defaultValue")]
-		public object DefaultValue { get; set; }
+		[JsonPropertyName("defaultValue")] public object DefaultValue { get; set; }
 
-		[JsonPropertyName("length")]
-		public int? Length { get; set; }
+		[JsonPropertyName("length")] public int? Length { get; set; }
 	}
 
 	public class Attributes : ICovid19Data
@@ -54,9 +45,9 @@ namespace Reble.RKIWebService.Entities
 		private long lastUpdateTimestamp;
 		private string stateName;
 
-		[JsonPropertyName("cases7_per_100k")]
-		public double Cases7Per100k { get; set; }
-		[JsonPropertyName("Aktualisierung")]//This is for the state data
+		[JsonPropertyName("cases7_per_100k")] public double Cases7Per100k { get; set; }
+
+		[JsonPropertyName("Aktualisierung")] //This is for the state data
 		public long LastUpdateTimestamp
 		{
 			get => lastUpdateTimestamp;
@@ -66,55 +57,53 @@ namespace Reble.RKIWebService.Entities
 				LastUpdate = DateTimeOffset.FromUnixTimeMilliseconds(value).UtcDateTime.ToLocalTime();
 			}
 		}
+
 		[JsonPropertyName("last_update")]
 		public string LastUpdateString
 		{
-			get => lastUpdateString; set
+			get => lastUpdateString;
+			set
 			{
 				lastUpdateString = value;
 				if (DateTime.TryParseExact(value, @"dd.MM.yyyy, HH:mm U\hr", null, DateTimeStyles.None, out DateTime result))
 					LastUpdate = result;
 			}
 		}
-		[JsonIgnore]
-		public DateTime LastUpdate { get; private set; }
-		[JsonPropertyName("cases")]
-		public int Cases { get; set; }
 
-		[JsonPropertyName("GEN")]
-		public string District { get; set; }
+		[JsonIgnore] public DateTime LastUpdate { get; private set; }
+		[JsonPropertyName("cases")] public int Cases { get; set; }
 
-		[JsonPropertyName("cases_per_100k")]
-		public double CasesPer100k { get; set; }
+		[JsonPropertyName("GEN")] public string District { get; set; }
 
-		[JsonPropertyName("death_rate")]
-		public double DeathRate { get; set; }
+		[JsonPropertyName("cases_per_100k")] public double CasesPer100k { get; set; }
+
+		[JsonPropertyName("death_rate")] public double DeathRate { get; set; }
+
 		[JsonPropertyName("cases_per_population")]
 		public double CasesPerPopulation { get; set; }
-		[JsonPropertyName("deaths")]
-		public int TotalDeath { get; set; }
-		[JsonPropertyName("RS")]
-		public string CityKey { get; set; }
+
+		[JsonPropertyName("deaths")] public int TotalDeath { get; set; }
+		[JsonPropertyName("RS")] public string CityKey { get; set; }
+
 		[JsonPropertyName("LAN_ew_GEN")]
 		public string StateName
 		{
-			get => stateName; set
+			get => stateName;
+			set
 			{
 				stateName = value;
 				District = value;
 			}
 		}
-		[JsonPropertyName("LAN_ew_EWZ")]
-		public long TotalStatePopulation { get; set; }
-		[JsonPropertyName("OBJECTID_1")]
-		public StateIds StateKey { get; set; }
+
+		[JsonPropertyName("LAN_ew_EWZ")] public long TotalStatePopulation { get; set; }
+		[JsonPropertyName("OBJECTID_1")] public StateIds StateKey { get; set; }
 	}
 
 
 	public class Feature
 	{
-		[JsonPropertyName("attributes")]
-		public Attributes Attributes { get; set; }
+		[JsonPropertyName("attributes")] public Attributes Attributes { get; set; }
 	}
 
 	public class ArcgisData
@@ -122,22 +111,17 @@ namespace Reble.RKIWebService.Entities
 		[JsonPropertyName("objectIdFieldName")]
 		public string ObjectIdFieldName { get; set; }
 
-		[JsonPropertyName("uniqueIdField")]
-		public UniqueIdField UniqueIdField { get; set; }
+		[JsonPropertyName("uniqueIdField")] public UniqueIdField UniqueIdField { get; set; }
 
 		[JsonPropertyName("globalIdFieldName")]
 		public string GlobalIdFieldName { get; set; }
 
-		[JsonPropertyName("geometryType")]
-		public string GeometryType { get; set; }
+		[JsonPropertyName("geometryType")] public string GeometryType { get; set; }
 
-		[JsonPropertyName("spatialReference")]
-		public SpatialReference SpatialReference { get; set; }
+		[JsonPropertyName("spatialReference")] public SpatialReference SpatialReference { get; set; }
 
-		[JsonPropertyName("fields")]
-		public List<Field> Fields { get; set; }
+		[JsonPropertyName("fields")] public List<Field> Fields { get; set; }
 
-		[JsonPropertyName("features")]
-		public List<Feature> Features { get; set; }
+		[JsonPropertyName("features")] public List<Feature> Features { get; set; }
 	}
 }

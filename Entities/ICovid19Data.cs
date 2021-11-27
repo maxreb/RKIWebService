@@ -1,5 +1,4 @@
 ﻿using System;
-using Reble.RKIWebService.Services;
 
 namespace Reble.RKIWebService.Entities
 {
@@ -12,6 +11,7 @@ namespace Reble.RKIWebService.Entities
 		string District { get; }
 		int TotalDeath { get; }
 		double DeathRate { get; }
+
 		double CasesPerPopulation { get; }
 		// StateIds GetStateId() => CitiesRepository.GetStateFromCityKey()
 	}

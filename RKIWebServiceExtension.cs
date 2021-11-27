@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Reble.RKIWebService.Services;
 using Reble.RKIWebService.Services.Arcgis;
-using System;
 
 namespace Reble.RKIWebService
 {

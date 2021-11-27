@@ -1,8 +1,7 @@
-﻿using Microsoft.Extensions.Hosting;
-using Reble.RKIWebService.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Hosting;
+using Reble.RKIWebService.Entities;
 
 namespace Reble.RKIWebService.Services
 {
@@ -10,6 +9,7 @@ namespace Reble.RKIWebService.Services
 	{
 		ICovid19Data? GetCurrentCityData(string cityKey);
 		ICovid19Data? GetCurrentStateData(string cityKey);
+
 		/// <summary>
 		/// Tries to get the data from specific time span
 		/// </summary>
@@ -20,6 +20,7 @@ namespace Reble.RKIWebService.Services
 		/// <returns>On Success: true
 		/// On Failure: false and data.Count == 0</returns>
 		bool TryGetCityData(string cityKey, DateTime from, out IEnumerable<ICovid19Data> data, DateTime? to = null);
+
 		bool TryGetStateData(string cityKey, DateTime from, out IEnumerable<ICovid19Data> data, DateTime? to = null);
 		bool TryGetCountryData(DateTime from, out IEnumerable<ICovid19Data> data, DateTime? to = null);
 	}

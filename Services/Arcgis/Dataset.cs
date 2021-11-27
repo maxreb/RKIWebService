@@ -1,12 +1,10 @@
-﻿using Reble.RKIWebService.Entities;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Runtime.Serialization;
-using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using Reble.RKIWebService.Entities;
 
 namespace Reble.RKIWebService.Services.Arcgis
 {
@@ -31,7 +29,7 @@ namespace Reble.RKIWebService.Services.Arcgis
 		internal abstract Func<Feature, bool> LinqKeySearchMethod(string cityKey);
 
 		public ICovid19Data? GetCurrent(string cityKey)
-		 => CurrentDataSet?.Features.FirstOrDefault(LinqKeySearchMethod(cityKey))?.Attributes;
+			=> CurrentDataSet?.Features.FirstOrDefault(LinqKeySearchMethod(cityKey))?.Attributes;
 
 
 		public bool TryGetFromCityKey(string cityKey, DateTime from, out IEnumerable<ICovid19Data> data, DateTime? to = null)
@@ -46,6 +44,7 @@ namespace Reble.RKIWebService.Services.Arcgis
 				data = Enumerable.Empty<ICovid19Data>();
 				return false;
 			}
+
 			data = PastData
 				.Where(x => x.Key >= from && x.Key <= to)
 				.Select(x => (ICovid19Data?)x.Value.Features.FirstOrDefault(LinqKeySearchMethod(cityKey))?.Attributes)
@@ -60,6 +59,7 @@ namespace Reble.RKIWebService.Services.Arcgis
 			var res = await _http.GetAsync(uri).ConfigureAwait(false) ?? throw new Exception("No data");
 			return await res.Content.ReadAsStringAsync().ConfigureAwait(false);
 		}
+
 		internal bool SetCurrentDataSet(string json, ILogger? logger = null)
 		{
 			CurrentDataSet = DeserializeArcgis(json);
@@ -69,11 +69,13 @@ namespace Reble.RKIWebService.Services.Arcgis
 				logger?.LogError("Deserialization failed, CurrentDataSet is null");
 				return false;
 			}
+
 			if (!CurrentDataSet.Features.Any())
 			{
 				logger?.LogError("Deserialization failed, no features");
 				return false;
 			}
+
 			LastUpdate = CurrentDataSet.Features.First().Attributes.LastUpdate;
 			PastData[LastUpdate] = CurrentDataSet;
 			return true;
@@ -89,6 +91,5 @@ namespace Reble.RKIWebService.Services.Arcgis
 		//}
 
 		public abstract ArcgisData? DeserializeArcgis(string json);
-
 	}
 }

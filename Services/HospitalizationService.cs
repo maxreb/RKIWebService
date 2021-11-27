@@ -23,9 +23,8 @@ namespace Reble.RKIWebService.Services
 
 		private Dictionary<StateIds, IEnumerable<HospitalizationData>> _records =
 			new Dictionary<StateIds, IEnumerable<HospitalizationData>>();
-		
+
 		public TaskCompletionSource<bool> TaskCompletionSource { get; set; } = new TaskCompletionSource<bool>();
-		
 
 
 		public HospitalizationService(IHttpClientFactory factory)

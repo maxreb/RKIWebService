@@ -1,17 +1,16 @@
-﻿using Reble.RKIWebService.Entities;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Reble.RKIWebService.Entities;
 
 namespace Reble.RKIWebService.Services.Arcgis
 {
@@ -21,6 +20,7 @@ namespace Reble.RKIWebService.Services.Arcgis
 		public int MaxDataSets { get; set; } = 365;
 		public string DatabasePath { get; set; } = "data/arcgis/";
 	}
+
 	public sealed class ArcgisService : BackgroundService, ICovidApiService
 	{
 		ArcgisServiceOptions Options { get; }
@@ -44,9 +44,6 @@ namespace Reble.RKIWebService.Services.Arcgis
 
 			Options = new ArcgisServiceOptions();
 			configuration.GetSection(ArcgisServiceOptions.OptionsPath).Bind(Options);
-
-
-
 		}
 
 		private string GetDBPath(Dataset dataset)
@@ -78,18 +75,20 @@ namespace Reble.RKIWebService.Services.Arcgis
 				_logger.LogError(ex, "ReadDatabase error");
 			}
 		}
+
 		private void ReadDatabases()
 		{
-
 			_logger.LogInformation("Read databases...");
 			if (!Directory.Exists(Options.DatabasePath))
 			{
 				Directory.CreateDirectory(Options.DatabasePath);
 				return;
 			}
+
 			ReadDatabase(_datasetCity);
 			ReadDatabase(_datasetState);
-			_logger.LogInformation("Database: {0} city and {0} state records found", _datasetCity.PastData.Count, _datasetState.PastData.Count);
+			_logger.LogInformation("Database: {0} city and {0} state records found", _datasetCity.PastData.Count,
+				_datasetState.PastData.Count);
 			CleanUpDatabase();
 		}
 
@@ -102,7 +101,6 @@ namespace Reble.RKIWebService.Services.Arcgis
 
 			void cleanup(Dataset dataset)
 			{
-
 				string dir = GetDBPath(dataset);
 				var files = Directory.GetFiles(dir, "*.json");
 				//Cleanup files
@@ -116,6 +114,7 @@ namespace Reble.RKIWebService.Services.Arcgis
 						File.Delete(file);
 					}
 				}
+
 				//Cleanup mem
 				if (dataset.PastData.Count > Options.MaxDataSets)
 				{
@@ -126,6 +125,7 @@ namespace Reble.RKIWebService.Services.Arcgis
 				}
 			}
 		}
+
 		private async Task<bool> GetNewData(Dataset dataset)
 		{
 			try
@@ -150,6 +150,7 @@ namespace Reble.RKIWebService.Services.Arcgis
 				_logger.LogError(ex, "GetNewData failed");
 				return false;
 			}
+
 			return true;
 		}
 
@@ -169,8 +170,8 @@ namespace Reble.RKIWebService.Services.Arcgis
 				if (oldHash == null || !newHash.SequenceEqual(oldHash))
 				{
 					_logger.LogInformation("New updated arrived");
-					bool success = await GetNewData(_datasetCity);//for cities
-					success &= await GetNewData(_datasetState);//for federal states
+					bool success = await GetNewData(_datasetCity); //for cities
+					success &= await GetNewData(_datasetState); //for federal states
 					if (success)
 						oldHash = newHash;
 					CleanUpDatabase();
@@ -189,7 +190,7 @@ namespace Reble.RKIWebService.Services.Arcgis
 			=> _datasetCity.TryGetFromCityKey(cityKey, from, out data, to);
 
 		public bool TryGetStateData(string cityKey, DateTime from, out IEnumerable<ICovid19Data> data, DateTime? to = null)
-		=> _datasetState.TryGetFromCityKey(cityKey, from, out data, to);
+			=> _datasetState.TryGetFromCityKey(cityKey, from, out data, to);
 
 		public bool TryGetCountryData(DateTime @from, out IEnumerable<ICovid19Data> data, DateTime? to = null)
 		{
